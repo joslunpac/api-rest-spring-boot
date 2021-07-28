@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger # Ruta para swagger, por defecto es /swagger-ui.html
+    tags-sorter: alpha # Ordenamos alfabeticamente los tags
+    operations-sorter: method # Ordenamos las operaciones por tipo
+    doc-expansion: list # Expandimos por defecto los tags
+    default-models-expand-depth: 0 # Contraemos por defecto los modelos
+  api-docs:
+    path: /docs # Ruta para docs, por defecto es /v3/api-docs
+    groups:
+      enabled: true
+  group-configs:
+    - group: v1.0.0
+      packages-to-scan:
+        - com.apirestspringboot.controller
+      paths-to-match: /**
+
+app:
+  name: @project.name@
+  version: @project.version@
+  description: @project.description@
